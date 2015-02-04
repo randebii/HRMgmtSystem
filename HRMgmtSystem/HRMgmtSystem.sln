@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Core", "HRMS.Core\HRMS.Core.csproj", "{F62CD352-8941-463C-9B7C-4C035739320D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Web", "HRMS.Web\HRMS.Web.csproj", "{B224A41B-1A64-4A22-ADA4-AC703E179F23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.DAL.SQL", "HRMS.DAL.SQL\HRMS.DAL.SQL.csproj", "{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F62CD352-8941-463C-9B7C-4C035739320D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62CD352-8941-463C-9B7C-4C035739320D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62CD352-8941-463C-9B7C-4C035739320D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62CD352-8941-463C-9B7C-4C035739320D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B224A41B-1A64-4A22-ADA4-AC703E179F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B224A41B-1A64-4A22-ADA4-AC703E179F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B224A41B-1A64-4A22-ADA4-AC703E179F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B224A41B-1A64-4A22-ADA4-AC703E179F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
