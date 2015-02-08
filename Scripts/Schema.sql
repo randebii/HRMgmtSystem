@@ -27,8 +27,7 @@ create table SchoolYears
 (
 	Id nvarchar(9) not null,
 	StartDate date not null,
-	EndDate date not null,
-	IsCurrent bit not null default 0,
+	EndDate date null,
 
 	constraint PK_SchoolYears primary key (Id)
 )
@@ -60,8 +59,7 @@ go
 create table Leaves
 (
 	Id int not null identity,
-	Name nvarchar(100) not null,
-	[Days] int not null,
+	Name nvarchar(100) not null
 
 	constraint PK_Leaves primary key (Id)
 )
@@ -190,11 +188,11 @@ create table DailyTimeRecords
 (
 	EmployeeId int not null,
 	[Date] date not null,
-	AMIn time not null,
-	AMOut time not null,
-	PMIn time not null,
-	PMOut time not null,
-	IsAbsent bit not null default 0,
+	AMIn time null,
+	AMOut time null,
+	PMIn time null,
+	PMOut time null,
+	AbsentType int null,
 
 	constraint PK_DailyTimeRecords primary key (EmployeeId, [Date]),
 	constraint FK_DailyTimeRecords_EmployeeId foreign key (EmployeeId) references Employees(Id)
