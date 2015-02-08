@@ -12,12 +12,70 @@ go
 use HRMgmtSystem
 go
 
+create table GlobalRules
+(
+	Id int not null,
+	Name nvarchar (100),
+	Value int not null,
+		
+	constraint PK_GlobalRules primary key (Id),
+	constraint UQ_GlobalRules unique (Name)
+)
+go
+
+create table SchoolYears
+(
+	Id nvarchar(9) not null,
+	StartDate date not null,
+	EndDate date not null,
+	IsCurrent bit not null default 0,
+
+	constraint PK_SchoolYears primary key (Id)
+)
+go
+
 create table Departments
 (
 	Id int not null identity,
 	Name nvarchar(300) not null,
+	Abbreviation nvarchar(10) null,
 
-	constraint PK_Departments primary key (Id)
+	constraint PK_Departments primary key (Id),
+	constraint UQ_Departments_Name unique (Name)
+)
+go
+
+create table Positions
+(
+	Id int not null identity,
+	Name nvarchar(100) not null,
+	[Type] int not null, -- enum [Regular, Probationary, PartTime]
+	MonthsBeforePromotion int null, -- for Probationary
+
+	constraint PK_Positions primary key (Id),
+	constraint UQ_Positions_Name unique (Name)
+)
+go
+
+create table Leaves
+(
+	Id int not null identity,
+	Name nvarchar(100) not null,
+	[Days] int not null,
+
+	constraint PK_Leaves primary key (Id)
+)
+go
+
+create table LeavesEntitled
+(
+	PositionId int not null,
+	LeaveId int not null,
+	DaysEntitled int not null,
+
+	constraint PK_LeavesEntitled primary key (PositionId, LeaveId),
+	constraint FK_LeavesEntitled_PositionId foreign key (PositionId) references Positions(Id),
+	constraint FK_LeavedEntitled_LeaveId foreign key (LeaveId) references Leaves(Id)
 )
 go
 
@@ -26,11 +84,12 @@ create table Employees
 	-- basic info
 	Id int not null identity,
 	DepartmentId int not null,
+	PositionId int not null,
 	LastName nvarchar(50) not null,
 	FirstName nvarchar(100) not null,
 	MiddleName nvarchar(50) null,
 	Extension nvarchar(5) null,
-	BirthDate datetime not null,
+	BirthDate date not null,
 	Gender int not null, -- enum
 	CivilStatus int not null, -- enum
 	Religion nvarchar(100),
@@ -49,11 +108,9 @@ create table Employees
 	EmployeeIdNumber nvarchar(20) null,
 
 	-- employement history
-	HiringDate datetime not null,
-	RegularizationDate datetime null, -- optional, more specific date than computing HiringDate + 3 years
-	EndDate datetime null,
-	Position nvarchar(100) not null,
-	EmploymentType int not null, -- enum [Regular, Probationary, PartTime]
+	HiringDate date not null,
+	RegularizationDate date null, -- optional, more specific date than computing HiringDate + 3 years
+	EndDate date null,	
 	BasicPay decimal (10, 2) null,
 
 	-- hiring requirements
@@ -79,7 +136,8 @@ create table Employees
 	Fecalysis bit not null default 0
 
 	constraint PK_Employees primary key (Id),
-	constraint FK_Employees_DepartmentId foreign key (DepartmentId) references Departments(Id)
+	constraint FK_Employees_DepartmentId foreign key (DepartmentId) references Departments(Id),
+	constraint FK_Employees_PositionId foreign key (PositionId) references Positions(Id)
 )
 go
 
@@ -112,17 +170,7 @@ create table EmploymentHistory
 )
 go
 
-create table Leaves
-(
-	Id int not null identity,
-	Name nvarchar(100) not null,
-	[Days] int not null,
-
-	constraint PK_Leaves primary key (Id)
-)
-go
-
-create table LeavesTaken
+create table EmployeeLeaves
 (
 	Id int not null identity,
 	EmployeeId int not null,
@@ -132,9 +180,9 @@ create table LeavesTaken
 	EquivalentDays int not null,
 	Remarks nvarchar(300) null,
 
-	constraint PK_LeavesTaken primary key (Id),
-	constraint FK_LeavesTaken_EmployeeId foreign key (EmployeeId) references Employees(Id),
-	constraint FK_LeavesTaken_LeaveId foreign key (LeaveId) references Leaves(Id)
+	constraint PK_EmployeeLeaves primary key (Id),
+	constraint FK_EmployeeLeaves_EmployeeId foreign key (EmployeeId) references Employees(Id),
+	constraint FK_EmployeeLeaves_LeaveId foreign key (LeaveId) references Leaves(Id)
 )
 go
 
@@ -146,7 +194,6 @@ create table DailyTimeRecords
 	AMOut time not null,
 	PMIn time not null,
 	PMOut time not null,
-	Late time null,
 	IsAbsent bit not null default 0,
 
 	constraint PK_DailyTimeRecords primary key (EmployeeId, [Date]),
