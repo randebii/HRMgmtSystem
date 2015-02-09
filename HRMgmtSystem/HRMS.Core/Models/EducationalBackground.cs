@@ -1,4 +1,5 @@
-﻿using HRMS.Core.Enums;
+﻿using HRMS.Core.Attributes;
+using HRMS.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace HRMS.Core.Models
 {
     public class EducationalBackground
     {
+        [Id(IdType.DatabaseGenerated)]
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         public EducationalLevel Type { get; set; }

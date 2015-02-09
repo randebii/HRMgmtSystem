@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRMS.Core.Attributes
+namespace HRMS.Core.Enums
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public class DbIgnoreAttribute : Attribute
+    public enum IdType
     {
+        DatabaseGenerated,
+        UserDefined
     }
 }

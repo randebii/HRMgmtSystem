@@ -11,6 +11,7 @@ namespace HRMS.Core.Models
 {
     public class Position
     {
+        [Id(IdType.DatabaseGenerated)]
         public int Id { get; set; }
         public string Name { get; set; }
         public EmployeeType Type { get; set; }

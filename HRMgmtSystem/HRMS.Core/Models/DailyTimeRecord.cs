@@ -1,4 +1,5 @@
-﻿using HRMS.Core.Enums;
+﻿using HRMS.Core.Attributes;
+using HRMS.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace HRMS.Core.Models
 {
     public class DailyTimeRecord
     {
+        [Id(IdType.UserDefined, 1)]
         public int EmployeeId { get; set; }
+        [Id(IdType.UserDefined, 2)]
         public DateTime Date { get; set; }
         public TimeSpan? AMIn { get; set; }
         public TimeSpan? AMOut { get; set; }
