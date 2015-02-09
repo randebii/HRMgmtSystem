@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Web", "HRMS.Web\HRMS.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.DAL.SQL", "HRMS.DAL.SQL\HRMS.DAL.SQL.csproj", "{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.UnitTests", "HRMS.UnitTests\HRMS.UnitTests.csproj", "{C7F42085-5592-4ABB-B1E1-55A2BEC40E58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F42085-5592-4ABB-B1E1-55A2BEC40E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F42085-5592-4ABB-B1E1-55A2BEC40E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F42085-5592-4ABB-B1E1-55A2BEC40E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F42085-5592-4ABB-B1E1-55A2BEC40E58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

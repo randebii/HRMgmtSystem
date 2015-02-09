@@ -12,10 +12,21 @@ go
 use HRMgmtSystem
 go
 
--- TODO create user table
 -- TODO add returnee in Employee
 -- TODO change dependents on Employee to list (Name, Relationship)
 -- TODO update C# models to new changes
+
+create table Users
+(
+	Id int not null identity,
+	Username nvarchar(30) not null,
+	[Password] nvarchar(50) not null,
+	[Role] int not null,
+
+	constraint PK_Users primary key (Id),
+	constraint UQ_Users_Username unique (Username)
+)
+go
 
 create table GlobalRules
 (
@@ -154,7 +165,7 @@ create table EducationalBackgrounds
 	Degree nvarchar(200) null,
 	[Address] nvarchar(500) null,
 	YearAttended nvarchar(20) null,
-	ContactNumber nvarchar(30) null
+	ContactNumber nvarchar(30) null,
 
 	constraint PK_EducationalBackgrounds primary key (Id),
 	constraint FK_EducationalBackgrounds_EmployeeId foreign key (EmployeeId) references Employees(Id)

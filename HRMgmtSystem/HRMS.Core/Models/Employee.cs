@@ -39,8 +39,8 @@ namespace HRMS.Core.Models
         public DateTime? RegularizationDate { get; set; }
         public DateTime? EndDate { get; set; }
         public decimal? BasicPay { get; set; }
-        public bool UpdatedTOR { get; set; }
-        public bool UpdatedResume { get; set; }
+        public bool TOR { get; set; }
+        public bool Resume { get; set; }
         public bool GoodMoralCert { get; set; }
         public bool Diploma { get; set; }
         public bool BirthCert { get; set; }

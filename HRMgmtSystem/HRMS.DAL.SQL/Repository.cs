@@ -1,35 +1,39 @@
-﻿using HRMS.Core.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
+using HRMS.Core.Contracts;
 using HRMS.Core.Utility;
 using HRMS.Core.Attributes;
 using HRMS.Core.Enums;
 using Dapper;
+using System.Data.SqlClient;
 
 namespace HRMS.DAL.SQL
 {
     public abstract class Repository<T> : IRepository<T> where T: class, new()
     {
-        #region Static
-        private static string sqlCreateFormat;
-        private static string sqlUpdateFormat;
-        private static string sqlGetByIdFormat;
-        private static string sqlDeleteFormat;
-        protected static IEnumerable<PropertyInfo> idPropInfos;
+        private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=HRMgmtSystem;Integrated Security=True;";
 
+        #region Static
         static Repository()
         {
             T instance = new T();
-            idPropInfos = GetIdProperties(instance);
-            sqlCreateFormat = GenerateSqlCreateFormat(instance);
-            sqlUpdateFormat = GenerateSqlUpdateFormat(instance, idPropInfos);
-            sqlGetByIdFormat = GenerateSQLGetByIdFormat(idPropInfos);
-            sqlDeleteFormat = GenerateSQLDeleteFormat(idPropInfos);
+            IdPropInfos = GetIdProperties(instance);
+            SqlCreateFormat = GenerateSqlCreateFormat(instance);
+            SqlUpdateFormat = GenerateSqlUpdateFormat(instance, IdPropInfos);
+            SqlGetByIdFormat = GenerateSQLGetByIdFormat(IdPropInfos);
+            SqlDeleteFormat = GenerateSQLDeleteFormat(IdPropInfos);
         }
+
+        protected static string SqlCreateFormat { get; private set; }
+        protected static string SqlUpdateFormat { get; private set; }
+        protected static string SqlGetByIdFormat { get; private set; }
+        protected static string SqlDeleteFormat { get; private set; }
+        protected static IEnumerable<PropertyInfo> IdPropInfos { get; private set; }
 
         private static string GenerateSqlCreateFormat(T instance)
         {
@@ -38,7 +42,7 @@ namespace HRMS.DAL.SQL
             var propertyInfos = GetAllPropertiesForCreate(instance);
 
             var sb = new StringBuilder();
-            sb.Append("INSERT INTO {0} (");
+            sb.Append("INSERT INTO [{0}] (");
             sb.Append(string.Join(", ", propertyInfos.Select(a => "[" + a.Name + "]")));
             sb.Append(") VALUES (");
             sb.Append(string.Join(", ", propertyInfos.Select(a => "@" + a.Name)));
@@ -55,7 +59,7 @@ namespace HRMS.DAL.SQL
             var propertyInfos = GetAllPropertiesForUpdate(instance);
 
             var sb = new StringBuilder();
-            sb.Append("UPDATE {0} SET ");
+            sb.Append("UPDATE [{0}] SET ");
             sb.Append(string.Join(", ", propertyInfos.Select(a => "[" + a.Name + "] = @" + a.Name)));
             sb.Append(" " + GenerateSQLWhereClauseForId(idProps));
             retVal = sb.ToString();
@@ -68,7 +72,7 @@ namespace HRMS.DAL.SQL
             string retVal = null;
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM {0} ");
+            sb.Append("SELECT * FROM [{0}] ");
             sb.Append(GenerateSQLWhereClauseForId(idProps));
             retVal = sb.ToString();
 
@@ -80,14 +84,14 @@ namespace HRMS.DAL.SQL
             string retVal = null;
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("DELETE FROM {0} ");
+            sb.Append("DELETE FROM [{0}] ");
             sb.Append(GenerateSQLWhereClauseForId(idProps));
             retVal = sb.ToString();
 
             return retVal;
         }
 
-        protected static string GenerateSQLWhereClauseForId(IEnumerable<PropertyInfo> propInfos)
+        private static string GenerateSQLWhereClauseForId(IEnumerable<PropertyInfo> propInfos)
         {
             string retVal = string.Empty;
 
@@ -202,7 +206,7 @@ namespace HRMS.DAL.SQL
             return retVal;
         }
 
-        protected static IEnumerable<PropertyInfo> GetIdProperties(T obj)
+        private static IEnumerable<PropertyInfo> GetIdProperties(T obj)
         {
             var retVal = new List<PropertyInfo>();
 
@@ -242,21 +246,52 @@ namespace HRMS.DAL.SQL
             Table = table;
         }
         
-        protected string Table { get; private set; }
+        public string Table { get; private set; }
 
-        public IEnumerable<T> Get()
+        protected virtual IDbConnection GetOpenConnection()
         {
-            throw new NotImplementedException();
+            var retVal = new SqlConnection(connectionString);
+            retVal.Open();
+            return retVal;
         }
 
-        public T Create(T model)
+        public virtual IEnumerable<T> Get()
         {
-            throw new NotImplementedException();
+            IEnumerable<T> retVal = null;
+
+            using (IDbConnection conn = GetOpenConnection())
+            {
+                string sql = string.Format("SELECT * FROM [{0}]", Table);
+                retVal = conn.Query<T>(sql);
+            }
+
+            return retVal;
         }
 
-        public void Update(T model)
+        public virtual T Create(T model)
         {
-            throw new NotImplementedException();
+             if (model != null)
+             {
+                 using (IDbConnection conn = GetOpenConnection())
+                 {
+                     string sql = string.Format(SqlCreateFormat, Table);
+                     conn.Execute(sql, model);
+                 }
+             }
+
+             return model;
+        }
+
+        public virtual void Update(T model)
+        {
+            if (model != null)
+            {
+                using (IDbConnection conn = GetOpenConnection())
+                {
+                    string sql = string.Format(SqlUpdateFormat, Table);
+                    conn.Execute(sql, model);
+                }
+            }
         }
     }
 }
