@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,12 +40,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DbIgnoreAttribute.cs" />
+    <Compile Include="Contracts\IDailyTimeRecordRepository.cs" />
+    <Compile Include="Contracts\IDepartmentRepository.cs" />
+    <Compile Include="Contracts\IDualIDRepostiory.cs" />
+    <Compile Include="Contracts\IEducationalBackgroundRepository.cs" />
+    <Compile Include="Contracts\IEmployeeLeaveRepository.cs" />
+    <Compile Include="Contracts\IEmploymentHistoryRepository.cs" />
+    <Compile Include="Contracts\IGlobalRuleRepository.cs" />
+    <Compile Include="Contracts\ILeaveEntitledRepository.cs" />
+    <Compile Include="Contracts\ILeaveRepository.cs" />
+    <Compile Include="Contracts\IPositionRepository.cs" />
+    <Compile Include="Contracts\ISchoolYearRepository.cs" />
+    <Compile Include="Contracts\ISingleIDRepository.cs" />
+    <Compile Include="Contracts\IEmployeeRepository.cs" />
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="Enums\AbsentType.cs" />
     <Compile Include="Enums\BloodType.cs" />
     <Compile Include="Enums\CivilStatus.cs" />
     <Compile Include="Enums\EducationalLevel.cs" />
     <Compile Include="Enums\EmployeeType.cs" />
     <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Models\DailyTimeRecord.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EducationalBackground.cs" />
@@ -56,8 +74,11 @@
     <Compile Include="Models\LeaveEntitled.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\SchoolYear.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Util.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
