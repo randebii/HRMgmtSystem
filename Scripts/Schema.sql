@@ -12,6 +12,11 @@ go
 use HRMgmtSystem
 go
 
+-- TODO create user table
+-- TODO add returnee in Employee
+-- TODO change dependents on Employee to list (Name, Relationship)
+-- TODO update C# models to new changes
+
 create table GlobalRules
 (
 	Id int not null,
@@ -112,8 +117,8 @@ create table Employees
 	BasicPay decimal (10, 2) null,
 
 	-- hiring requirements
-	UpdatedTOR bit not null default 0, -- ?
-	UpdatedResume bit not null default 0, -- ?
+	TOR bit not null default 0, -- ?
+	[Resume] bit not null default 0, -- ?
 	GoodMoralCert bit not null default 0,
 	Diploma bit not null default 0,
 	BirthCert bit not null default 0,
@@ -143,8 +148,10 @@ create table EducationalBackgrounds
 (
 	Id int not null identity,
 	EmployeeId int not null,
+	DateSubmitted date null, -- for updates to TOR
 	[Type] int not null, -- enum
 	Name nvarchar(300) not null,
+	Degree nvarchar(200) null,
 	[Address] nvarchar(500) null,
 	YearAttended nvarchar(20) null,
 	ContactNumber nvarchar(30) null

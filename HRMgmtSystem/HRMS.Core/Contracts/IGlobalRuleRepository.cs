@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface IGlobalRuleRepository : ISingleIDRepository<GlobalRule, int>
+    public interface IGlobalRuleRepository : ISingleIdRepository<GlobalRule, int>
     {
     }
 }

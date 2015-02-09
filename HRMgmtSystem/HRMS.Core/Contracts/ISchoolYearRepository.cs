@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface ISchoolYearRepository : ISingleIDRepository<SchoolYear, string>
+    public interface ISchoolYearRepository : ISingleIdRepository<SchoolYear, string>
     {
     }
 }

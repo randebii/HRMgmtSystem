@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface ISingleIDRepository<T, Tid> : IRepository<T> where T : class
+    public interface ISingleIdRepository<T, Tid> : IRepository<T> where T : class
     {
         T GetById(Tid id);
         void Delete(Tid id);

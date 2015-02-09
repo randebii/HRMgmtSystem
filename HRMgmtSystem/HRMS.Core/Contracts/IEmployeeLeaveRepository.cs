@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface IEmployeeLeaveRepository : ISingleIDRepository<EmployeeLeave, int>
+    public interface IEmployeeLeaveRepository : ISingleIdRepository<EmployeeLeave, int>
     {
     }
 }

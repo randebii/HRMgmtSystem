@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface IEducationalBackgroundRepository : ISingleIDRepository<EducationalBackground, int>
+    public interface IEducationalBackgroundRepository : ISingleIdRepository<EducationalBackground, int>
     {
     }
 }

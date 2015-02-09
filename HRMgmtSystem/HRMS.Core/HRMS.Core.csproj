@@ -44,7 +44,7 @@
     <Compile Include="Attributes\IdAttribute.cs" />
     <Compile Include="Contracts\IDailyTimeRecordRepository.cs" />
     <Compile Include="Contracts\IDepartmentRepository.cs" />
-    <Compile Include="Contracts\IDualIDRepostiory.cs" />
+    <Compile Include="Contracts\IDualIdRepository.cs" />
     <Compile Include="Contracts\IEducationalBackgroundRepository.cs" />
     <Compile Include="Contracts\IEmployeeLeaveRepository.cs" />
     <Compile Include="Contracts\IEmploymentHistoryRepository.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="Contracts\ILeaveRepository.cs" />
     <Compile Include="Contracts\IPositionRepository.cs" />
     <Compile Include="Contracts\ISchoolYearRepository.cs" />
-    <Compile Include="Contracts\ISingleIDRepository.cs" />
+    <Compile Include="Contracts\ISingleIdRepository.cs" />
     <Compile Include="Contracts\IEmployeeRepository.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUserRepository.cs" />

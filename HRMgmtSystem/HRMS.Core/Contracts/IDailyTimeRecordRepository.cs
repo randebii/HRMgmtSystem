@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface IDailyTimeRecordRepository : IDualIDRepostiory<DailyTimeRecord, int, DateTime>
+    public interface IDailyTimeRecordRepository : IDualIdRepository<DailyTimeRecord, int, DateTime>
     {
     }
 }
