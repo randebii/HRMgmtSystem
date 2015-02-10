@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyTimeRecordRepository.cs" />
+    <Compile Include="DepartmentRepository.cs" />
     <Compile Include="DualIdRepository.cs" />
+    <Compile Include="EmployeeRepository.cs" />
     <Compile Include="LeaveEntitledRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
