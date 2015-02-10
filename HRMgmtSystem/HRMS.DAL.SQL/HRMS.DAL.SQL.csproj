@@ -45,10 +45,17 @@
     <Compile Include="DailyTimeRecordRepository.cs" />
     <Compile Include="DepartmentRepository.cs" />
     <Compile Include="DualIdRepository.cs" />
+    <Compile Include="EducationalBackgroundRepository.cs" />
+    <Compile Include="EmployeeLeaveRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
+    <Compile Include="EmploymentHistoryRepository.cs" />
+    <Compile Include="GlobalRuleRepository.cs" />
     <Compile Include="LeaveEntitledRepository.cs" />
+    <Compile Include="LeaveRepository.cs" />
+    <Compile Include="PositionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="SchoolYearRepository.cs" />
     <Compile Include="SingleIdRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
