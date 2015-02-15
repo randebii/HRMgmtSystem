@@ -41,6 +41,8 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,21 +57,24 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLRepository\GenericRepoTest.cs" />
+    <Compile Include="SQLRepositoryTests\EmployeeTest.cs" />
+    <Compile Include="SQLRepositoryTests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj">
       <Project>{f62cd352-8941-463c-9b7c-4c035739320d}</Project>
       <Name>HRMS.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HRMS.DAL.SQL\HRMS.DAL.SQL.csproj">
-      <Project>{ac0ec0f6-bae6-4324-b64e-6a83252d8919}</Project>
-      <Name>HRMS.DAL.SQL</Name>
+    <ProjectReference Include="..\HRMS.Framework\HRMS.Framework.csproj">
+      <Project>{650474f4-370f-4b0b-af3e-92ace1d1f957}</Project>
+      <Name>HRMS.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

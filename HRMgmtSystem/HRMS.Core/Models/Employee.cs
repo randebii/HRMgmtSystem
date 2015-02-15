@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRMS.Core.Models
 {
@@ -18,11 +19,12 @@ namespace HRMS.Core.Models
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string Extension { get; set; }
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public CivilStatus CivilStatus { get; set; }
         public string Religion { get; set; }
-        public BloodType BloodType { get; set; }
+        public BloodType? BloodType { get; set; }
         public string CurrentAddress { get; set; }
         public string PermanentAddress { get; set; }
         public string ContactNumber { get; set; }
@@ -58,10 +60,15 @@ namespace HRMS.Core.Models
         public bool CBC { get; set; }
         public bool Fecalysis { get; set; }
         
+        [DbIgnore]
         public Department Department { get; set; }
+        [DbIgnore]
         public Position Position { get; set; }
+        [DbIgnore]
         public IList<EmploymentHistory> EmploymentHistory { get; set; }
+        [DbIgnore]
         public IList<EducationalBackground> EducationalBackground { get; set; }
+        [DbIgnore]
         public IEnumerable<EmployeeLeave> LeavesTaken { get; set; }
     }
 }

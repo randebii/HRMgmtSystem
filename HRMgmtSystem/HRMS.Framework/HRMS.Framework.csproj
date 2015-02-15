@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC0EC0F6-BAE6-4324-B64E-6A83252D8919}</ProjectGuid>
+    <ProjectGuid>{650474F4-370F-4B0B-AF3E-92ACE1D1F957}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HRMS.DAL.SQL</RootNamespace>
-    <AssemblyName>HRMS.DAL.SQL</AssemblyName>
+    <RootNamespace>HRMS.Framework</RootNamespace>
+    <AssemblyName>HRMS.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper">
-      <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,31 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DailyTimeRecordRepository.cs" />
-    <Compile Include="DepartmentRepository.cs" />
-    <Compile Include="DualIdRepository.cs" />
-    <Compile Include="EducationalBackgroundRepository.cs" />
-    <Compile Include="EmployeeLeaveRepository.cs" />
-    <Compile Include="EmployeeRepository.cs" />
-    <Compile Include="EmploymentHistoryRepository.cs" />
-    <Compile Include="GlobalRuleRepository.cs" />
-    <Compile Include="LeaveEntitledRepository.cs" />
-    <Compile Include="LeaveRepository.cs" />
-    <Compile Include="PositionRepository.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="SchoolYearRepository.cs" />
-    <Compile Include="SingleIdRepository.cs" />
-    <Compile Include="UserRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Ioc.cs" />
+    <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj">
       <Project>{f62cd352-8941-463c-9b7c-4c035739320d}</Project>
       <Name>HRMS.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HRMS.DAL.SQL\HRMS.DAL.SQL.csproj">
+      <Project>{ac0ec0f6-bae6-4324-b64e-6a83252d8919}</Project>
+      <Name>HRMS.DAL.SQL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

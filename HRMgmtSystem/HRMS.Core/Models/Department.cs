@@ -15,6 +15,7 @@ namespace HRMS.Core.Models
         public string Name { get; set; }
         public string Abbreviation { get; set; }
 
+        [DbIgnore]
         public IEnumerable<Employee> Employees { get; set; }
     }
 }

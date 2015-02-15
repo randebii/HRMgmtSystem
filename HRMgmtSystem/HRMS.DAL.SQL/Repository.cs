@@ -11,12 +11,13 @@ using HRMS.Core.Attributes;
 using HRMS.Core.Enums;
 using Dapper;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace HRMS.DAL.SQL
 {
     public abstract class Repository<T> : IRepository<T> where T: class, new()
     {
-        private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=HRMgmtSystem;Integrated Security=True;";
+        private string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
 
         #region Static
         static Repository()
