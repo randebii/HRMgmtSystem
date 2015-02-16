@@ -9,5 +9,6 @@ namespace HRMS.Core.Contracts
 {
     public interface IDepartmentRepository : IRepository<Department>, ISingleIdRepository<Department, int>
     {
+        IEnumerable<IdValuePair<int>> GetIdValuePair();        
     }
 }

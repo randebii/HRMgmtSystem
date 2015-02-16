@@ -294,5 +294,18 @@ namespace HRMS.DAL.SQL
                 }
             }
         }
+        
+        public virtual int Count()
+        {
+            int retVal = 0;
+
+            using (IDbConnection conn = GetOpenConnection())
+            {
+                string sql = string.Format("SELECT COUNT(*) FROM [{0}]", Table);
+                retVal = conn.Query<int>(sql).First();
+            }
+
+            return retVal;
+        }
     }
 }

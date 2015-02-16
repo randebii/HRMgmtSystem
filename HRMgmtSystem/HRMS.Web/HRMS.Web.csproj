@@ -135,6 +135,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeDtl.cs" />
+    <Compile Include="Models\EmployeeListItem.cs" />
+    <Compile Include="Models\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +215,8 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Employee\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -228,6 +232,10 @@
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj">
       <Project>{f62cd352-8941-463c-9b7c-4c035739320d}</Project>
       <Name>HRMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRMS.Framework\HRMS.Framework.csproj">
+      <Project>{650474f4-370f-4b0b-af3e-92ace1d1f957}</Project>
+      <Name>HRMS.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -44,6 +44,7 @@
     <Compile Include="Attributes\IdAttribute.cs" />
     <Compile Include="Contracts\IDailyTimeRecordRepository.cs" />
     <Compile Include="Contracts\IDepartmentRepository.cs" />
+    <Compile Include="Contracts\IDependentRepository.cs" />
     <Compile Include="Contracts\IDualIdRepository.cs" />
     <Compile Include="Contracts\IEducationalBackgroundRepository.cs" />
     <Compile Include="Contracts\IEmployeeLeaveRepository.cs" />
@@ -65,14 +66,17 @@
     <Compile Include="Enums\EmployeeType.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\IdType.cs" />
+    <Compile Include="Enums\Relation.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Models\DailyTimeRecord.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Dependent.cs" />
     <Compile Include="Models\EducationalBackground.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeLeave.cs" />
     <Compile Include="Models\EmploymentHistory.cs" />
     <Compile Include="Models\GlobalRule.cs" />
+    <Compile Include="Models\IdValuePair.cs" />
     <Compile Include="Models\Leave.cs" />
     <Compile Include="Models\LeaveEntitled.cs" />
     <Compile Include="Models\Position.cs" />

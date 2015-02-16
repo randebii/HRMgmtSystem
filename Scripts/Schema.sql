@@ -68,7 +68,7 @@ create table Positions
 	MonthsBeforePromotion int null, -- for Probationary
 
 	constraint PK_Positions primary key (Id),
-	constraint UQ_Positions_Name unique (Name)
+	constraint UQ_Positions_Name unique (Name, [Type])
 )
 go
 
@@ -99,14 +99,14 @@ create table Employees
 	Id int not null identity,
 	DepartmentId int not null,
 	PositionId int not null,
-	LastName nvarchar(50) not null,
+	LastName nvarchar(100) not null,
 	FirstName nvarchar(100) not null,
-	MiddleName nvarchar(50) null,
+	MiddleName nvarchar(100) null,
 	Extension nvarchar(5) null,
 	BirthDate date not null,
 	Gender int not null, -- enum
 	CivilStatus int not null, -- enum
-	Religion nvarchar(100),
+	Religion nvarchar(100) null,
 	BloodType int null, -- enum
 	CurrentAddress nvarchar(500) null,
 	PermanentAddress nvarchar(500) null,
@@ -114,6 +114,7 @@ create table Employees
 	ContactPerson nvarchar(200) null,
 	ContactPersonNumber nvarchar(30) null,
 	ContactPersonAddress nvarchar(500) null,
+	ContactPersonRelation int null, -- enum
 	SSS nvarchar(50) null,
 	TIN nvarchar(50) null,
 	Pagibig nvarchar(50) null,
@@ -139,8 +140,6 @@ create table Employees
 	NBIClearance bit not null default 0,
 	BrgyClearance bit not null default 0,
 	LicensureCert bit not null default 0,
-	QualifiedDependents bit not null default 0, -- ?
-	BirthCertDependents bit not null default 0, -- ?
 
 	-- medical exam req
 	Urinalysis bit not null default 0,
@@ -152,6 +151,20 @@ create table Employees
 	constraint PK_Employees primary key (Id),
 	constraint FK_Employees_DepartmentId foreign key (DepartmentId) references Departments(Id),
 	constraint FK_Employees_PositionId foreign key (PositionId) references Positions(Id)
+)
+go
+
+create table Dependents
+(
+	Id int not null identity,
+	EmployeeId int not null,
+	Name nvarchar(300) not null,
+	ContactNumber nvarchar(20) null,
+	[Address] nvarchar(500) null,
+	Relation int not null, -- enum
+
+	constraint PK_Dependents primary key (Id),
+	constraint FK_Dependents_EmployeeId foreign key (EmployeeId) references Employees (Id)
 )
 go
 
@@ -215,4 +228,32 @@ create table DailyTimeRecords
 	constraint PK_DailyTimeRecords primary key (EmployeeId, [Date]),
 	constraint FK_DailyTimeRecords_EmployeeId foreign key (EmployeeId) references Employees(Id)
 )
+go
+
+
+-- inital data
+insert into Departments([Name], [Abbreviation]) values
+('College of Business and Information Technology', 'CBIT'),
+('College of Nursing', 'CON'),
+('College of Arts and Education', 'CAED'),
+('High School', 'HS'),
+('Elementary', 'Elem'),
+('Administration', 'Admin')
+go
+
+insert into Positions([Name], [Type]) values
+('Faculty', 0),
+('Faculty', 1),
+('Faculty', 2),
+('Staff', 0),
+('Staff', 1),
+('Staff', 2)
+go
+
+insert into Employees([FirstName], [LastName], [MiddleName], [Extension], [ContactNumber], [HiringDate], [BirthDate], [Gender], [CivilStatus], [DepartmentId], [PositionId])
+values ('Randolph', 'Bangay', 'Eleccion', 'II', '3483223', getdate(), getdate(), 0, 0, 1, 1)
+go
+
+insert into Employees([FirstName], [LastName], [MiddleName], [Extension], [ContactNumber], [HiringDate], [BirthDate], [Gender], [CivilStatus], [DepartmentId], [PositionId])
+values ('Mary Mundeline', 'Cadiente', 'Cadimas', null, '9023402', getdate(), getdate(), 0, 0, 5, 1)
 go

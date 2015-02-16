@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Enums
 {
-    public enum BloodType
+    public enum Relation
     {
         NA,
-        A,
-        B,
-        AB,
-        O
+        Father,
+        Mother,
+        Sister,
+        Brother,
+        Wife,
+        Husband,
+        Child,
+        Relative,
+        Other
     }
 }

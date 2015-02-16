@@ -1,4 +1,5 @@
 ﻿using HRMS.Core.Enums;
+using HRMS.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,59 @@ namespace HRMS.Web.Models
 {
     public class EmployeeDtl
     {
+        public EmployeeDtl() { }
+        public EmployeeDtl(Employee emp)
+        {
+            if (emp != null)
+            {
+                Id = emp.Id;
+                DepartmentId = emp.DepartmentId;
+                PositionId = emp.PositionId;
+                FirstName = emp.FirstName;
+                LastName = emp.LastName;
+                MiddleName = emp.MiddleName;
+                Extension = emp.Extension;
+                BirthDate = emp.BirthDate;
+                Gender = emp.Gender;
+                CivilStatus = emp.CivilStatus;
+                Religion = emp.Religion;
+                BloodType = emp.BloodType;
+                CurrentAddress = emp.CurrentAddress;
+                PermanentAddress = emp.PermanentAddress;
+                ContactNumber = emp.ContactNumber;
+                ContactPerson = emp.ContactPerson;
+                ContactPersonNumber = emp.ContactPersonNumber;
+                ContactPersonAddress = emp.ContactPersonAddress;
+                ContactPersonRelation = emp.ContactPersonRelation;
+                SSS = emp.SSS;
+                TIN = emp.TIN;
+                Pagibig = emp.Pagibig;
+                PhilHealth = emp.Pagibig;
+                PRCLicenseNumber = emp.PRCLicenseNumber;
+                EmployeeIdNumber = emp.EmployeeIdNumber;
+                HiringDate = emp.HiringDate;
+                RegularizationDate = emp.RegularizationDate;
+                EndDate = emp.EndDate;
+                BasicPay = emp.BasicPay;
+                TOR = emp.TOR;
+                Resume = emp.Resume;
+                GoodMoralCert = emp.GoodMoralCert;
+                Diploma = emp.Diploma;
+                BirthCert = emp.BirthCert;
+                MarriageCert = emp.MarriageCert;
+                BaptismalCert = emp.BaptismalCert;
+                PoliceClearance = emp.PoliceClearance;
+                NBIClearance = emp.NBIClearance;
+                BrgyClearance = emp.BrgyClearance;
+                LicensureCert = emp.LicensureCert;
+                Urinalysis = emp.Urinalysis;
+                DentalExam = emp.DentalExam;
+                ChestXRay = emp.ChestXRay;
+                CBC = emp.CBC;
+                Fecalysis = emp.Fecalysis;
+            }
+        }
+
         public int Id { get; set; }
         [Required, Display(Name = "*Department")]
         public int DepartmentId { get; set; }
@@ -43,6 +97,8 @@ namespace HRMS.Web.Models
         public string ContactPersonNumber { get; set; }
         [Display(Name = "Address")]
         public string ContactPersonAddress { get; set; }
+        [Display(Name = "Relation")]
+        public Relation? ContactPersonRelation { get; set; }
         public string SSS { get; set; }
         public string TIN { get; set; }
         public string Pagibig { get; set; }
@@ -80,8 +136,6 @@ namespace HRMS.Web.Models
         public bool BrgyClearance { get; set; }
         [Display(Name = "Licensure Cert (if applicable)")]
         public bool LicensureCert { get; set; }
-        public bool QualifiedDependents { get; set; }
-        public bool BirthCertDependents { get; set; }
         public bool Urinalysis { get; set; }
         [Display(Name = "Dental Exam")]
         public bool DentalExam { get; set; }

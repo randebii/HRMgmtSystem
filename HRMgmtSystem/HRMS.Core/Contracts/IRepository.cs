@@ -11,5 +11,6 @@ namespace HRMS.Core.Contracts
         IEnumerable<T> Get();
         T Create(T model);
         void Update(T model);
+        int Count();
     }
 }

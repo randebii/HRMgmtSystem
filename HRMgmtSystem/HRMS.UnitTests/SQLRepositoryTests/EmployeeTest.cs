@@ -158,5 +158,34 @@ namespace HRMS.UnitTests.SQLRepositoryTests
             Assert.AreEqual(1, resultCountBefore);
             Assert.AreEqual(0, resultCountAfter);
         }
+
+        [TestMethod]
+        public void GetForListItems()
+        {
+            // Arrange
+            var repo = Ioc.Get<IEmployeeRepository>();
+            Employee employee = testObjects.GetEmployee(true);
+
+            // create
+            repo.Create(employee);
+
+            IEnumerable<Employee> resultFromGet = null;
+            Employee employeeFromGet = null;
+
+            // Act
+            resultFromGet = repo.GetForListItems();
+
+            // Assert
+            Assert.IsNotNull(resultFromGet);
+            Assert.AreEqual(1, resultFromGet.Count());
+
+            employeeFromGet = resultFromGet.ElementAt(0);
+            Assert.IsFalse(string.IsNullOrEmpty(employeeFromGet.FirstName));
+            Assert.IsFalse(string.IsNullOrEmpty(employeeFromGet.LastName));
+            //Assert.IsFalse(string.IsNullOrEmpty(employeeFromGet.MiddleName)); // uncomment when get test employee with all details done
+            //Assert.IsFalse(string.IsNullOrEmpty(employeeFromGet.Extension));
+            Assert.IsNotNull(employeeFromGet.Department);
+            Assert.IsNotNull(employeeFromGet.Position);
+        }
     }
 }

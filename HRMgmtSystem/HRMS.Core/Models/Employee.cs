@@ -30,6 +30,7 @@ namespace HRMS.Core.Models
         public string ContactPerson { get; set; }
         public string ContactPersonNumber { get; set; }
         public string ContactPersonAddress { get; set; }
+        public Relation? ContactPersonRelation { get; set; }
         public string SSS { get; set; }
         public string TIN { get; set; }
         public string Pagibig { get; set; }
@@ -51,8 +52,6 @@ namespace HRMS.Core.Models
         public bool NBIClearance { get; set; }
         public bool BrgyClearance { get; set; }
         public bool LicensureCert { get; set; }
-        public bool QualifiedDependents { get; set; }
-        public bool BirthCertDependents { get; set; }
         public bool Urinalysis { get; set; }
         public bool DentalExam { get; set; }
         public bool ChestXRay { get; set; }
@@ -64,10 +63,12 @@ namespace HRMS.Core.Models
         [DbIgnore]
         public Position Position { get; set; }
         [DbIgnore]
-        public IList<EmploymentHistory> EmploymentHistory { get; set; }
+        public IEnumerable<EmploymentHistory> EmploymentHistory { get; set; }
         [DbIgnore]
-        public IList<EducationalBackground> EducationalBackground { get; set; }
+        public IEnumerable<EducationalBackground> EducationalBackground { get; set; }
         [DbIgnore]
         public IEnumerable<EmployeeLeave> LeavesTaken { get; set; }
+        [DbIgnore]
+        public IEnumerable<Dependent> Dependents { get; set; }
     }
 }

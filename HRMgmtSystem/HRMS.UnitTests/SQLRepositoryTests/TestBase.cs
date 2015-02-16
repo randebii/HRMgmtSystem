@@ -39,19 +39,28 @@ namespace HRMS.UnitTests.SQLRepositoryTests
         public virtual void Init()
         {
             conn = GetOpenConnection();
+            //CleanDatabase(conn);
         }
 
         [TestCleanup]
         public virtual void CleanUp()
         {
-            conn.Execute(@"DELETE FROM Employees DBCC CHECKIDENT ('Employees',RESEED, 0)");
-            conn.Execute(@"DELETE FROM Departments DBCC CHECKIDENT ('Departments',RESEED, 0)");
-            conn.Execute(@"DELETE FROM Positions DBCC CHECKIDENT ('Positions',RESEED, 0)");
+            CleanDatabase(conn);
 
             if (conn != null)
             {
                 conn.Close();
                 conn.Dispose();
+            }
+        }
+
+        private void CleanDatabase(IDbConnection conn)
+        {
+            if (conn != null && conn.State == ConnectionState.Open)
+            {
+                conn.Execute(@"DELETE FROM Employees DBCC CHECKIDENT ('Employees',RESEED, 0)");
+                conn.Execute(@"DELETE FROM Departments DBCC CHECKIDENT ('Departments',RESEED, 0)");
+                conn.Execute(@"DELETE FROM Positions DBCC CHECKIDENT ('Positions',RESEED, 0)");
             }
         }
     }

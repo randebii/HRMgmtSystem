@@ -15,6 +15,7 @@ namespace HRMS.Framework
             TinyIoC.TinyIoCContainer ioc = TinyIoC.TinyIoCContainer.Current;
             ioc.Register<IDailyTimeRecordRepository, DailyTimeRecordRepository>().AsMultiInstance();
             ioc.Register<IDepartmentRepository, DepartmentRepository>().AsMultiInstance();
+            ioc.Register<IDependentRepository, DependentRepository>().AsMultiInstance();
             ioc.Register<IEducationalBackgroundRepository, EducationalBackgroundRepository>().AsMultiInstance();
             ioc.Register<IEmployeeLeaveRepository, EmployeeLeaveRepository>().AsMultiInstance();
             ioc.Register<IEmployeeRepository, EmployeeRepository>().AsMultiInstance();

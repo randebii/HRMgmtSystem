@@ -9,5 +9,6 @@ namespace HRMS.Core.Contracts
 {
     public interface IEmployeeRepository : IRepository<Employee>, ISingleIdRepository<Employee, int>
     {
+        IEnumerable<Employee> GetForListItems();
     }
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.Core.Contracts
 {
-    public interface IPositionRepository : ISingleIdRepository<Position, int>
+    public interface IDependentRepository : IRepository<Dependent>, ISingleIdRepository<Dependent, int>
     {
-        IEnumerable<IdValuePair<int>> GetIdValuePair();
     }
 }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DailyTimeRecordRepository.cs" />
     <Compile Include="DepartmentRepository.cs" />
+    <Compile Include="DependentRepository.cs" />
     <Compile Include="DualIdRepository.cs" />
     <Compile Include="EducationalBackgroundRepository.cs" />
     <Compile Include="EmployeeLeaveRepository.cs" />
