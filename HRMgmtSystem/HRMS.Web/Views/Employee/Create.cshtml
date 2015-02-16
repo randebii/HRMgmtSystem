@@ -1,0 +1,491 @@
+﻿@model HRMS.Web.Models.EmployeeDtl
+
+@{
+    ViewBag.Title = "Create Employee";
+}
+
+<h2>Create Employee</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <!--Basic Information-->
+        <div class="panel panel-default form-controls">
+            <div class="panel-heading">
+                <h4 class="panel-title">Basic Information</h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.LastName)
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.FirstName)
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.MiddleName)
+                                @Html.ValidationMessageFor(model => model.MiddleName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.Extension, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Extension)
+                                @Html.ValidationMessageFor(model => model.Extension)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.BirthDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.BirthDate)
+                                @Html.ValidationMessageFor(model => model.BirthDate)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.Religion, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Religion)
+                                @Html.ValidationMessageFor(model => model.Religion)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Gender)
+                                @Html.ValidationMessageFor(model => model.Gender)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.CivilStatus, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.CivilStatus)
+                                @Html.ValidationMessageFor(model => model.CivilStatus)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.BloodType, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.BloodType)
+                                @Html.ValidationMessageFor(model => model.BloodType)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.ContactNumber, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ContactNumber)
+                                @Html.ValidationMessageFor(model => model.ContactNumber)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.CurrentAddress, new { @class = "control-label" })
+                            <div>
+                                @Html.TextAreaFor(model => model.CurrentAddress)
+                                @Html.ValidationMessageFor(model => model.CurrentAddress)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress, new { @class = "control-label" })
+                            <div>
+                                @Html.TextAreaFor(model => model.PermanentAddress)
+                                @Html.ValidationMessageFor(model => model.PermanentAddress)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Employee Information-->
+        <div class="panel panel-default form-controls">
+            <div class="panel-heading">
+                <h4 class="panel-title">Employee Information</h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.DepartmentId)
+                                @Html.ValidationMessageFor(model => model.DepartmentId)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.PositionId, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.PositionId)
+                                @Html.ValidationMessageFor(model => model.PositionId)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.HiringDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.HiringDate)
+                                @Html.ValidationMessageFor(model => model.HiringDate)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.EmployeeIdNumber, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.EmployeeIdNumber)
+                                @Html.ValidationMessageFor(model => model.EmployeeIdNumber)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.RegularizationDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.RegularizationDate)
+                                @Html.ValidationMessageFor(model => model.RegularizationDate)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.EndDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.EndDate)
+                                @Html.ValidationMessageFor(model => model.EndDate)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.SSS, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.SSS)
+                                @Html.ValidationMessageFor(model => model.SSS)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.TIN, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.TIN)
+                                @Html.ValidationMessageFor(model => model.TIN)
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.Pagibig, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Pagibig)
+                                @Html.ValidationMessageFor(model => model.Pagibig)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.PhilHealth, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.PhilHealth)
+                                @Html.ValidationMessageFor(model => model.PhilHealth)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.PRCLicenseNumber, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.PRCLicenseNumber)
+                                @Html.ValidationMessageFor(model => model.PRCLicenseNumber)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.BasicPay, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.BasicPay)
+                                @Html.ValidationMessageFor(model => model.BasicPay)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Contact Person-->
+        <div class="panel panel-default form-controls">
+            <div class="panel-heading">
+                <h4 class="panel-title">Contact Person</h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.ContactPerson, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ContactPerson)
+                                @Html.ValidationMessageFor(model => model.ContactPerson)
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.ContactPersonNumber, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ContactPersonNumber)
+                                @Html.ValidationMessageFor(model => model.ContactPersonNumber)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.ContactPersonAddress, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ContactPersonAddress)
+                                @Html.ValidationMessageFor(model => model.ContactPersonAddress)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Requirements-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Requirements</h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.TOR) @Html.LabelFor(model => model.TOR)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.Resume) @Html.LabelFor(model => model.Resume)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.GoodMoralCert) @Html.LabelFor(model => model.GoodMoralCert)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.Diploma) @Html.LabelFor(model => model.Diploma)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.BirthCert) @Html.LabelFor(model => model.BirthCert)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.MarriageCert) @Html.LabelFor(model => model.MarriageCert)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.BaptismalCert) @Html.LabelFor(model => model.BaptismalCert)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.PoliceClearance) @Html.LabelFor(model => model.PoliceClearance)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.NBIClearance) @Html.LabelFor(model => model.NBIClearance)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.BrgyClearance) @Html.LabelFor(model => model.BrgyClearance)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.LicensureCert) @Html.LabelFor(model => model.LicensureCert)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.QualifiedDependents) @Html.LabelFor(model => model.QualifiedDependents)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                     <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.BirthCertDependents) @Html.LabelFor(model => model.BirthCertDependents)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.Urinalysis) @Html.LabelFor(model => model.Urinalysis)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.DentalExam) @Html.LabelFor(model => model.DentalExam)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.ChestXRay) @Html.LabelFor(model => model.ChestXRay)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                     <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.CBC) @Html.LabelFor(model => model.CBC)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.EditorFor(model => model.Fecalysis) @Html.LabelFor(model => model.Fecalysis)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    @Html.ActionLink("Back to List", "index", null, new { @class = "btn btn-link", id = "backToList" })
+                    <input type="submit" value="Create Employee" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    @Scripts.Render(
+        "~/bundles/jqueryval", 
+        "~/bundles/noty")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".form-controls input").addClass("form-control");
+            $(".form-controls textarea").addClass("form-control");
+            $("input[type=checkbox]").css("height", "15px").css("width", "15px");
+        });
+    </script>
+}

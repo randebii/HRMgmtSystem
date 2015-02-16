@@ -23,6 +23,13 @@ namespace HRMS.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                    "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/noty").Include(
+                    "~/Scripts/noty/packaged/jquery.noty.packaged.min.js",
+                    "~/Scripts/noty/notyWrapper.js"));
         }
     }
 }
