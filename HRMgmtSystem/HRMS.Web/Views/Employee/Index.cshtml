@@ -3,16 +3,12 @@
     ViewBag.Title = "Employee";
 }
 
-<h2>Employees</h2>
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="pull-right">
-            @Html.ActionLink("Create new Employee", "create", null, new { @class = "btn btn-primary" })
-        </div>
+<div class="page-header">
+    <h2>Employees</h2>
+    <div class="pull-right page-header-control">
+        @Html.ActionLink("Create New Employee", "create", null, new { @class = "btn btn-default" })
     </div>
 </div>
-<br />
 <div class="row">
     <div class="col-sm-12">
         <table id="employee-table" class="display" cellspacing="0" style="width: 100%;">
@@ -34,6 +30,11 @@
 @section Scripts{    
     @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
     
+    <script type="text/template" id="grid-btn">
+        <button type='button' class='btn btn-default btn-sm' aria-label='Profile'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Profile</button>&nbsp;
+        <button type='button' class='btn btn-default btn-sm' aria-label='Edit'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Edit</button>
+    </script>
+
     <script type="text/javascript">
         // using ajax, server processing, for future reference
         @*$(document).ready(function () {
@@ -81,7 +82,7 @@
                     {
                         targets: -1,
                         data: null,
-                        defaultContent: "<button type='button' class='btn btn-default' aria-label='Profile'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span> Profile</button>&nbsp;<button type='button' class='btn btn-default' aria-label='Edit'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Edit</button>"
+                        defaultContent: $("#grid-btn").html()
                     }
                 ]
             });

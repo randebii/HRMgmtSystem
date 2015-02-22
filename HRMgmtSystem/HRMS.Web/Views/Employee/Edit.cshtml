@@ -4,21 +4,22 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Employee</h2>
+<div class="page-header">
+    <h2>Edit Employee</h2>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
         <!--Basic Information-->
         <div class="panel panel-default form-controls">
             <div class="panel-heading">
-                <h4 class="panel-title">Basic Information</h4>
+                <h4 class="panel-title">Personal Information</h4>
             </div>
 
             <div class="panel-body">
@@ -83,7 +84,7 @@
                         <div class="col-sm-4">
                             @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
                             <div>
-                                @Html.DropDownListFor(model => model.Gender, (IEnumerable<SelectListItem>)ViewBag.Genders)
+                                @Html.DropDownList("Gender", (IEnumerable<SelectListItem>)ViewBag.Genders)
                                 @Html.ValidationMessageFor(model => model.Gender)
                             </div>
                         </div>
@@ -91,7 +92,7 @@
                         <div class="col-sm-4">
                             @Html.LabelFor(model => model.CivilStatus, new { @class = "control-label" })
                             <div>
-                                @Html.DropDownListFor(model => model.CivilStatus, (IEnumerable<SelectListItem>)ViewBag.CivilStatuses)
+                                @Html.DropDownList("CivilStatus", (IEnumerable<SelectListItem>)ViewBag.CivilStatuses)
                                 @Html.ValidationMessageFor(model => model.CivilStatus)
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 ﻿using HRMS.Core.Contracts;
 using HRMS.Core.Enums;
+using HRMS.Core.Models;
 using HRMS.Framework;
 using HRMS.Web.Models;
 using System;
@@ -37,8 +38,21 @@ namespace HRMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // todo code
+                Employee emp = model.ToModel();
+                var repo = Ioc.Get<IEmployeeRepository>();
+                emp = repo.Create(emp);
+
+                TempData["Success"] = "New employee successfully created.";
+
+                return RedirectToAction("profile", new { id = emp.Id });
             }
+
+            ViewBag.Departments = Ioc.Get<IDepartmentRepository>().GetIdValuePair().ToSelectList(model.DepartmentId);
+            ViewBag.Positions = Ioc.Get<IPositionRepository>().GetIdValuePair().ToSelectList(model.PositionId);
+            ViewBag.Genders = Util.GetSelectList<Gender>();
+            ViewBag.CivilStatuses = Util.GetSelectList<CivilStatus>();
+            ViewBag.BloodTypes = Util.GetSelectList<BloodType>();
+            ViewBag.Relations = Util.GetSelectList<Relation>();
 
             return View(model);
         }
@@ -50,10 +64,10 @@ namespace HRMS.Web.Controllers
             
             ViewBag.Departments = Ioc.Get<IDepartmentRepository>().GetIdValuePair().ToSelectList(model.DepartmentId);
             ViewBag.Positions = Ioc.Get<IPositionRepository>().GetIdValuePair().ToSelectList(model.PositionId);
-            ViewBag.Genders = Util.GetSelectList<Gender>(model.Gender.AsInt());
-            ViewBag.CivilStatuses = Util.GetSelectList<CivilStatus>(model.CivilStatus.AsInt());
-            ViewBag.BloodTypes = Util.GetSelectList<BloodType>(model.BloodType.HasValue ? model.BloodType.Value.AsInt() : BloodType.NA.AsInt());
-            ViewBag.Relations = Util.GetSelectList<Relation>(model.ContactPersonRelation.HasValue ? model.ContactPersonRelation.Value.AsInt() : Relation.NA.AsInt());
+            ViewBag.Genders = Util.GetSelectList<Gender>(model.Gender);
+            ViewBag.CivilStatuses = Util.GetSelectList<CivilStatus>(model.CivilStatus);
+            ViewBag.BloodTypes = Util.GetSelectList<BloodType>(model.BloodType);
+            ViewBag.Relations = Util.GetSelectList<Relation>(model.ContactPersonRelation);
 
             return View(model);
         }
@@ -64,15 +78,31 @@ namespace HRMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // todo code
+                Employee emp = model.ToModel();
+                var repo = Ioc.Get<IEmployeeRepository>();
+                repo.Update(emp);
+
+                TempData["Success"] = "Employee info successfully updated.";
+
+                return RedirectToAction("profile", new { id = emp.Id });
             }
+
+            ViewBag.Departments = Ioc.Get<IDepartmentRepository>().GetIdValuePair().ToSelectList(model.DepartmentId);
+            ViewBag.Positions = Ioc.Get<IPositionRepository>().GetIdValuePair().ToSelectList(model.PositionId);
+            ViewBag.Genders = Util.GetSelectList<Gender>(model.Gender);
+            ViewBag.CivilStatuses = Util.GetSelectList<CivilStatus>(model.CivilStatus);
+            ViewBag.BloodTypes = Util.GetSelectList<BloodType>(model.BloodType);
+            ViewBag.Relations = Util.GetSelectList<Relation>(model.ContactPersonRelation);
 
             return View(model);
         }
 
         public ActionResult Profile(int id)
         {
-            return View();
+            var employee = Ioc.Get<IEmployeeRepository>().GetById(id);
+            EmployeeDtl model = new EmployeeDtl(employee);
+
+            return View(model);
         }
 
         public JsonResult Query()

@@ -1,9 +1,455 @@
-﻿
+﻿@model HRMS.Web.Models.EmployeeDtl
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
+<div class="page-header-profile">
+    <h2>Profile <small>@Model.ProfileDisplay</small></h2>
+</div>
 
-Todo...
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#basic-info" aria-controls="basic-info" role="tab" data-toggle="tab">Basic Info</a></li>
+        <li role="presentation"><a href="#edu-background" aria-controls="edu-background" role="tab" data-toggle="tab">Educational Background</a></li>
+        <li role="presentation"><a href="#emp-history" aria-controls="emp-history" role="tab" data-toggle="tab">Employment History</a></li>
+        @*<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>*@
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="basic-info">
+            <div class="tab-content">
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success">@TempData["Success"]</div>
+                }
+
+                <div class="form-horizontal">
+                    <!--Basic Information-->
+                    <div class="panel panel-default form-controls">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Personal Information</h4>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.LastName)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.FirstName)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.MiddleName)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.Extension, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.Extension)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.BirthDate, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.BirthDate, new { type = "date", Value = Model.BirthDate.ToString("yyyy-MM-dd") })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.Religion, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.Religion)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.Gender)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.CivilStatus, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.CivilStatus)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.BloodType, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.BloodType)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.ContactNumber, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.ContactNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.CurrentAddress, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.CurrentAddress)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.PermanentAddress, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.PermanentAddress)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Employee Information-->
+                    <div class="panel panel-default form-controls">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Employee Information</h4>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.DepartmentId)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.PositionId, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.PositionId)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.HiringDate, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.HiringDate)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.EmployeeIdNumber, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.EmployeeIdNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.RegularizationDate, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.RegularizationDate)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.EndDate, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.EndDate)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.SSS, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.SSS)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.TIN, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.TIN)
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.Pagibig, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.Pagibig)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.PhilHealth, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.PhilHealth)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.PRCLicenseNumber, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.PRCLicenseNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.BasicPay, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.BasicPay)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Contact Person-->
+                    <div class="panel panel-default form-controls">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Contact Person</h4>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.ContactPerson, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.ContactPerson)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.ContactPersonNumber, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.ContactPersonNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.ContactPersonRelation, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.ContactPersonRelation)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(model => model.ContactPersonAddress, new { @class = "control-label" })
+                                        <div>
+                                            @Html.DisplayFor(model => model.ContactPersonAddress)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Requirements-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Requirements</h4>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.TOR, new { disabled = "disabled" }) @Html.LabelFor(model => model.TOR)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Resume, new { disabled = "disabled" }) @Html.LabelFor(model => model.Resume)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.GoodMoralCert, new { disabled = "disabled" }) @Html.LabelFor(model => model.GoodMoralCert)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Diploma, new { disabled = "disabled" }) @Html.LabelFor(model => model.Diploma)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.BirthCert, new { disabled = "disabled" }) @Html.LabelFor(model => model.BirthCert)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.MarriageCert, new { disabled = "disabled" }) @Html.LabelFor(model => model.MarriageCert)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.BaptismalCert, new { disabled = "disabled" }) @Html.LabelFor(model => model.BaptismalCert)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.PoliceClearance, new { disabled = "disabled" }) @Html.LabelFor(model => model.PoliceClearance)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.NBIClearance, new { disabled = "disabled" }) @Html.LabelFor(model => model.NBIClearance)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.BrgyClearance, new { disabled = "disabled" }) @Html.LabelFor(model => model.BrgyClearance)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.LicensureCert, new { disabled = "disabled" }) @Html.LabelFor(model => model.LicensureCert)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Urinalysis, new { disabled = "disabled" }) @Html.LabelFor(model => model.Urinalysis)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.DentalExam, new { disabled = "disabled" }) @Html.LabelFor(model => model.DentalExam)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.ChestXRay, new { disabled = "disabled" }) @Html.LabelFor(model => model.ChestXRay)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.CBC, new { disabled = "disabled" }) @Html.LabelFor(model => model.CBC)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Fecalysis, new { disabled = "disabled" }) @Html.LabelFor(model => model.Fecalysis)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="edu-background">...</div>
+        <div role="tabpanel" class="tab-pane fade" id="emp-history">...</div>
+        @*<div role="tabpanel" class="tab-pane fade" id="settings">...</div>*@
+    </div>
+
+</div>
 

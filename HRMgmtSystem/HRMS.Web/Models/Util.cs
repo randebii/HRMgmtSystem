@@ -14,24 +14,43 @@ namespace HRMS.Web.Models
             return Convert.ToInt32(enumVal);
         }
 
-        public static IEnumerable<SelectListItem> GetSelectList<TEnum>(int selectedValue = 0) where TEnum : struct, IComparable, IFormattable, IConvertible
+        //public static IEnumerable<SelectListItem> GetSelectList<TEnum>(int selectedValue = 0) where TEnum : struct, IComparable, IFormattable, IConvertible
+        //{
+        //    var type = typeof(TEnum);
+        //    if (!type.IsEnum)
+        //        throw new ArgumentException("T must be an Enum");
+                        
+        //    return Enum.GetValues(type)
+        //        .Cast<int>()
+        //        .Select(a => 
+        //        {                     
+        //            return new SelectListItem() 
+        //            { 
+        //                Text = Enum.GetName(type, a), 
+        //                Value = a.ToString(), 
+        //                Selected = a == selectedValue
+        //            }; 
+        //        })
+        //        .ToList();
+        //}
+
+        public static IEnumerable<SelectListItem> GetSelectList<TEnum>(TEnum? selectedValue = null) where TEnum : struct, IComparable, IFormattable, IConvertible
         {
             var type = typeof(TEnum);
             if (!type.IsEnum)
                 throw new ArgumentException("T must be an Enum");
-                        
-            return Enum.GetValues(type)
-                .Cast<int>()
-                .Select(a => 
-                {                     
-                    return new SelectListItem() 
-                    { 
-                        Text = Enum.GetName(type, a), 
-                        Value = a.ToString(), 
-                        Selected = a == selectedValue
-                    }; 
-                })
-                .ToList();
+
+            List<SelectListItem> retVal = new List<SelectListItem>();
+            foreach(var item in Enum.GetNames(typeof(TEnum)))
+            {
+                retVal.Add(new SelectListItem()
+                {
+                    Text = item,
+                    Value = item,
+                    Selected = (selectedValue.HasValue && selectedValue.Value.ToString() == item)
+                });
+            }
+            return retVal;
         }
 
         public static IEnumerable<SelectListItem> ToSelectList<T>(this IEnumerable<IdValuePair<T>> collection, T selectedValue = default(T)) where T: struct

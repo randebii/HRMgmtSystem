@@ -4,20 +4,21 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Employee</h2>
+<div class="page-header">
+    <h2>Create Employee</h2>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true)
 
         <!--Basic Information-->
         <div class="panel panel-default form-controls">
             <div class="panel-heading">
-                <h4 class="panel-title">Basic Information</h4>
+                <h4 class="panel-title">Personal Information</h4>
             </div>
 
             <div class="panel-body">

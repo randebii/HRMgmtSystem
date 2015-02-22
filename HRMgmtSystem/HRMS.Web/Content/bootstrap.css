@@ -562,6 +562,15 @@ h4 small,
   border-bottom: 1px solid #eeeeee;
 }
 
+.page-header-profile {
+padding-bottom: 9px;
+margin: 40px 0 0px;
+}
+
+.page-header-control {
+    margin-top: -40px;
+}
+
 ul,
 ol {
   margin-top: 0;
@@ -3994,6 +4003,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .tabbable:after {
   clear: both;
+}
+
+.tab-content {
+    padding: 5px 5px 0px 5px;
 }
 
 .tab-content > .tab-pane,
