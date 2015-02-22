@@ -99,7 +99,7 @@ namespace HRMS.Web.Controllers
 
         public ActionResult Profile(int id)
         {
-            var employee = Ioc.Get<IEmployeeRepository>().GetById(id);
+            var employee = Ioc.Get<IEmployeeRepository>().GetForProfile(id);
             EmployeeDtl model = new EmployeeDtl(employee);
 
             return View(model);

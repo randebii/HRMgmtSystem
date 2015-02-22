@@ -48,5 +48,30 @@ namespace HRMS.DAL.SQL
 
             return retVal;
         }
+
+
+        public Employee GetForProfile(int id)
+        {
+            Employee retVal = null;
+
+            using (IDbConnection conn = GetOpenConnection())
+            {
+                string sql = @"SELECT *
+                        FROM Employees a
+                        INNER JOIN Departments b on a.DepartmentId = b.Id
+                        INNER JOIN Positions c on a.PositionId = c.Id
+                        WHERE a.Id = @id";
+
+                retVal = conn.Query<Employee, Department, Position, Employee>(sql,
+                    (e, d, p) =>
+                    {
+                        e.Department = d;
+                        e.Position = p;
+                        return e;
+                    }, new { id }).FirstOrDefault();
+            }
+
+            return retVal;
+        }
     }
 }

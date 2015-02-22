@@ -9,31 +9,6 @@ namespace HRMS.Web.Models
 {
     public static class Util
     {
-        public static int AsInt<TEnum>(this TEnum enumVal) where TEnum : struct, IComparable, IFormattable, IConvertible
-        {
-            return Convert.ToInt32(enumVal);
-        }
-
-        //public static IEnumerable<SelectListItem> GetSelectList<TEnum>(int selectedValue = 0) where TEnum : struct, IComparable, IFormattable, IConvertible
-        //{
-        //    var type = typeof(TEnum);
-        //    if (!type.IsEnum)
-        //        throw new ArgumentException("T must be an Enum");
-                        
-        //    return Enum.GetValues(type)
-        //        .Cast<int>()
-        //        .Select(a => 
-        //        {                     
-        //            return new SelectListItem() 
-        //            { 
-        //                Text = Enum.GetName(type, a), 
-        //                Value = a.ToString(), 
-        //                Selected = a == selectedValue
-        //            }; 
-        //        })
-        //        .ToList();
-        //}
-
         public static IEnumerable<SelectListItem> GetSelectList<TEnum>(TEnum? selectedValue = null) where TEnum : struct, IComparable, IFormattable, IConvertible
         {
             var type = typeof(TEnum);

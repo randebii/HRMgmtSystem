@@ -463,7 +463,7 @@
         <div class="form-group">
             <div class="col-sm-12">
                 <div class="pull-right">
-                    @Html.ActionLink("Back to List", "index", null, new { @class = "btn btn-link", id = "backToList" })
+                    <a href="#" class="btn btn-link" id="btn-cancel">Cancel</a>
                     <input type="submit" value="Save Changes" class="btn btn-primary" />
                 </div>
             </div>
@@ -479,6 +479,11 @@
             $(".form-controls input").addClass("form-control");
             $(".form-controls textarea").addClass("form-control");
             $(".form-controls select").addClass("form-control");
+
+            $("#btn-cancel").click(function (e) {
+                e.preventDefault();
+                window.history.back();
+            });
         });
     </script>
 }

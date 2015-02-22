@@ -3,8 +3,10 @@
     ViewBag.Title = "Profile";
 }
 
+<input type="hidden" value="@Model.Id" id="emp-id" />
+
 <div class="page-header-profile">
-    <h2>Profile <small>@Model.ProfileDisplay</small></h2>
+    <h2>Profile <small>@Model.ProfileName</small></h2>
 </div>
 
 <div role="tabpanel">
@@ -146,16 +148,16 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="col-sm-4">
-                                        @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
+                                        @Html.LabelFor(model => model.ProfileDepartment, new { @class = "control-label" })
                                         <div>
-                                            @Html.DisplayFor(model => model.DepartmentId)
+                                            @Html.DisplayFor(model => model.ProfileDepartment)
                                         </div>
                                     </div>
 
                                     <div class="col-sm-4">
-                                        @Html.LabelFor(model => model.PositionId, new { @class = "control-label" })
+                                        @Html.LabelFor(model => model.ProfilePosition, new { @class = "control-label" })
                                         <div>
-                                            @Html.DisplayFor(model => model.PositionId)
+                                            @Html.DisplayFor(model => model.ProfilePosition)
                                         </div>
                                     </div>
 
@@ -443,13 +445,100 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="pull-right">
+                                <a class="btn btn-default" href="@Url.Action("edit", new { id = Model.Id })">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="edu-background">...</div>
-        <div role="tabpanel" class="tab-pane fade" id="emp-history">...</div>
+
+        <div role="tabpanel" class="tab-pane fade" id="edu-background">
+            <div class="tab-content" id="edu-container">
+                <div id="edu-throbber" class="throbber" style="display: none;"></div>
+                
+                <ul class="list-group edu-content" id="edu-list">
+                </ul>
+
+                <div class="row edu-content">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="pull-right">
+                                <a href="@Url.Action("create", "educationalbackground", new { id = Model.Id})" class="btn btn-default">Create New Background</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="emp-history">
+
+        </div>
         @*<div role="tabpanel" class="tab-pane fade" id="settings">...</div>*@
     </div>
 
 </div>
+
+@section Scripts {
+    <script type="text/template" id="edu-template">
+        <li class="list-group-item-dcg" id="edu-{{Id}}">
+            <a href="#" id="delete-edu-{{Id}}" style="color: black"><span class="pull-right glyphicon glyphicon-trash"></span></a>
+            <h4 class="list-group-item-heading">{{Name}} <small>({{Type}})</small></h4>
+            <p class="list-group-item-text">{{Degree}}</p>
+            <p class="list-group-item-text">{{Address}}</p>
+            <p class="list-group-item-text">{{ContactNum}}</p>
+            <p class="list-group-item-text">{{YearAttended}}</p>
+        </li>
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var id = $("#emp-id").val();
+            populateEducationalBackground(id);
+        });
+
+        function populateEducationalBackground(id) {
+            var container = $("#edu-container");
+            var content = $(".edu-content");
+            var throbber = $("#edu-throbber");
+            container.addClass("overlay");
+            content.hide();
+            throbber.show();
+            
+            $.get('@Url.Action("getbyemployee", "educationalbackground")' + '/' + id, function (data) {
+                var list = $("#edu-list");
+
+                if (data && data.length > 0) {
+                    var template = $("#edu-template").html();
+
+                    $.each(data, function (i, v) {
+                        var item = template
+                            .replace("{{Id}}", v.Id)
+                            .replace("{{Id}}", v.Id)
+                            .replace("{{Name}}", v.Name)
+                            .replace("{{Type}}", v.TypeDisplay)
+                            .replace("{{Degree}}", v.Degree == null ? "" : v.Degree)
+                            .replace("{{Address}}", v.Address == null ? "" : v.Address)
+                            .replace("{{ContactNum}}", v.ContactNumber == null ? "" : "Contact no. " + v.ContactNumber)
+                            .replace("{{YearAttended}}", v.YearAttended);
+
+                        list.append(item);
+                    });
+                } else {
+                    list.append("<center>No data yet.</center>");
+                }
+
+                setTimeout(function () {
+                    container.removeClass("overlay");
+                    throbber.hide();
+                    content.show();
+                }, 5000);
+            });
+        }
+    </script>
+}
 

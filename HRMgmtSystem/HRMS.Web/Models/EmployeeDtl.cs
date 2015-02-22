@@ -19,6 +19,16 @@ namespace HRMS.Web.Models
             {
                 emp.Convert<EmployeeDtl>(this);
 
+                if (emp.Department != null)
+                {
+                    Department = new DepartmentDtl(emp.Department);
+                }
+
+                if (emp.Position != null)
+                {
+                    Position = new PositionDtl(emp.Position);
+                }
+
                 #region manual assignment of properties
                 //Id = emp.Id;
                 //DepartmentId = emp.DepartmentId;
@@ -150,7 +160,10 @@ namespace HRMS.Web.Models
         public bool CBC { get; set; }
         public bool Fecalysis { get; set; }
 
-        public string ProfileDisplay
+        public DepartmentDtl Department { get; set; }
+        public PositionDtl Position { get; set; }
+
+        public string ProfileName
         {
             get
             {
@@ -173,10 +186,51 @@ namespace HRMS.Web.Models
                 return retVal.ToString();
             }
         }
+        
+        [Display(Name = "Department")]
+        public string ProfileDepartment
+        {
+            get
+            {
+                string retVal = string.Empty;
+                if (Department != null)
+                {
+                    retVal = string.Format("{0} ({1})", Department.Name, Department.Abbreviation);
+                }
+                return retVal;
+            }
+        }
+
+        [Display(Name = "Position")]
+        public string ProfilePosition
+        {
+            get
+            {
+                string retVal = string.Empty;
+                if (Position != null)
+                {
+                    retVal = string.Format("{0} ({1})", Position.Name, Position.Type.ToString());
+                }
+                return retVal;
+            }
+        }
 
         public Employee ToModel()
         {
-            return this.Convert<Employee>();
+            Employee retVal = this.Convert<Employee>();
+            if (retVal != null)
+            { 
+                if (Department != null)
+                {
+                    retVal.Department = Department.ToModel();
+                }
+
+                if (Position != null)
+                {
+                    retVal.Position = Position.ToModel();
+                }
+            }
+            return retVal;
         }
     }
 }
