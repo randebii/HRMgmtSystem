@@ -1,4 +1,5 @@
-﻿using HRMS.Web.Models;
+﻿using HRMS.Core.Enums;
+using HRMS.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,28 @@ namespace HRMS.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public PartialViewResult Create(int empId)
+        {
+            ViewBag.EmployeeId = empId;
+            ViewBag.EducationalTypes = Util.GetSelectList<EducationalLevel>();
+            return PartialView("CreateUpdateEducBackground");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(EducationalBackgroundDtl edu)
+        {
+            string returnUrl = Url.Action("profile", "employee", new { id = edu.EmployeeId }) + "#edu-background";
+
+            if (ModelState.IsValid)
+            {
+                // todo
+                TempData["edu-success"] = "New Education Background successfully created.";
+            }
+            
+            return Redirect(returnUrl);
         }
 
         public JsonResult GetByEmployee(int id)

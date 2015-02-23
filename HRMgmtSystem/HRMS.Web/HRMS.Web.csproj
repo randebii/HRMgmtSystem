@@ -221,10 +221,10 @@
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Profile.cshtml" />
+    <Content Include="Views\EducationalBackground\CreateUpdateEducBackground.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EducationalBackground\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

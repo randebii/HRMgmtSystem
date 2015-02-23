@@ -12,7 +12,7 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="emp-tab">
         <li role="presentation" class="active"><a href="#basic-info" aria-controls="basic-info" role="tab" data-toggle="tab">Basic Info</a></li>
         <li role="presentation"><a href="#edu-background" aria-controls="edu-background" role="tab" data-toggle="tab">Educational Background</a></li>
         <li role="presentation"><a href="#emp-history" aria-controls="emp-history" role="tab" data-toggle="tab">Employment History</a></li>
@@ -458,6 +458,11 @@
 
         <div role="tabpanel" class="tab-pane fade" id="edu-background">
             <div class="tab-content" id="edu-container">
+                @if (TempData["edu-success"] != null)
+                {
+                    <div class="alert alert-success">@TempData["edu-success"]</div>
+                }
+
                 <div id="edu-throbber" class="throbber" style="display: none;"></div>
                 
                 <ul class="list-group edu-content" id="edu-list">
@@ -467,7 +472,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="pull-right">
-                                <a href="@Url.Action("create", "educationalbackground", new { id = Model.Id})" class="btn btn-default">Create New Background</a>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edu-create">Create New Background</button>
                             </div>
                         </div>
                     </div>
@@ -481,9 +486,30 @@
         @*<div role="tabpanel" class="tab-pane fade" id="settings">...</div>*@
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="edu-create" tabindex="-1" role="dialog" aria-labelledby="edu-create-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create New Educational Background</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("create", "educationalbackground", new { empId = Model.Id })
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btn-edu-close">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn-edu-create">Create Background</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/template" id="edu-template">
         <li class="list-group-item-dcg" id="edu-{{Id}}">
             <a href="#" id="delete-edu-{{Id}}" style="color: black"><span class="pull-right glyphicon glyphicon-trash"></span></a>
@@ -496,9 +522,28 @@
     </script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
+            // activate specifc tab via hash in url
+            if (location.hash) {
+                $('#emp-tab a[href="' + location.hash + '"]').tab('show');
+            }
+
+            // populate education background for employee
             var id = $("#emp-id").val();
             populateEducationalBackground(id);
+
+            var eduForm = $("#edu-form");
+            $("#btn-edu-create").click(function () {
+                if (eduForm.valid()) {
+                    eduForm.submit();
+                }
+            });
+
+            var eduFormJs = document.getElementById("edu-form");
+            $("#btn-edu-close").click(function () {
+                eduFormJs.reset();
+            });
         });
 
         function populateEducationalBackground(id) {
@@ -532,11 +577,9 @@
                     list.append("<center>No data yet.</center>");
                 }
 
-                setTimeout(function () {
-                    container.removeClass("overlay");
-                    throbber.hide();
-                    content.show();
-                }, 5000);
+                container.removeClass("overlay");
+                throbber.hide();
+                content.show();
             });
         }
     </script>
