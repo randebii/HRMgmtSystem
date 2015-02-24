@@ -1,0 +1,52 @@
+﻿@model HRMS.Web.Models.EmploymentHistoryDtl
+
+@using (Html.BeginForm("create", "employmenthistory", FormMethod.Post, new { id = "emp-form" }))
+{
+    <input type="hidden" value="0" name="Id" />
+    <input type="hidden" value="@ViewBag.EmployeeId" name="EmployeeId" />
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Employer, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.Employer, new { @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(model => model.Employer)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.Position, new { @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(model => model.Position)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.YearsOfService, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.YearsOfService, new { @class = "form-control max-width", type = "number" })
+                    @Html.ValidationMessageFor(model => model.YearsOfService)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+    </div>
+}

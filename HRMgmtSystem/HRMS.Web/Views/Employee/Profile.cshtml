@@ -21,12 +21,10 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
+        <!-- Basic Info -->
         <div role="tabpanel" class="tab-pane fade in active" id="basic-info">
             <div class="tab-content">
-                @if (TempData["Success"] != null)
-                {
-                    <div class="alert alert-success">@TempData["Success"]</div>
-                }
+                @Html.Partial("ShowNotification", "Employee")
 
                 <div class="form-horizontal">
                     <!--Basic Information-->
@@ -456,12 +454,10 @@
             </div>
         </div>
 
+        <!-- Educational Background -->
         <div role="tabpanel" class="tab-pane fade" id="edu-background">
             <div class="tab-content" id="edu-container">
-                @if (TempData["edu-success"] != null)
-                {
-                    <div class="alert alert-success">@TempData["edu-success"]</div>
-                }
+                @Html.Partial("ShowNotification", "EducationalBackground")
 
                 <div id="edu-throbber" class="throbber" style="display: none;"></div>
                 
@@ -480,14 +476,34 @@
             </div>
         </div>
 
+        <!-- Employment History -->
         <div role="tabpanel" class="tab-pane fade" id="emp-history">
+            <div class="tab-content" id="emp-container">
+                @Html.Partial("ShowNotification", "EmploymentHistory")
 
+                <div id="emp-throbber" class="throbber" style="display:none;"></div>
+
+                <ul class="list-group emp-content" id="emp-list">
+
+                </ul>
+
+                <div class="row emp-content">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#emp-create">Create New History</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         @*<div role="tabpanel" class="tab-pane fade" id="settings">...</div>*@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Educational Background Modal -->
     <div class="modal fade" id="edu-create" tabindex="-1" role="dialog" aria-labelledby="edu-create-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -500,24 +516,57 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="btn-edu-close">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn-edu-create">Create Background</button>
+                    <button type="button" class="btn btn-primary" id="btn-edu-create">Create Educational Background</button>
                 </div>
             </div>
         </div>
     </div>
+    @using (Html.BeginForm("delete", "educationalbackground", FormMethod.Post, new { id = "edu-form-delete" })) {  @Html.AntiForgeryToken() }
+
+    <!-- Employment History Modal -->
+    <div class="modal fade" id="emp-create" tabindex="-1" role="dialog" aria-labelledby="emp-create-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create New Employment History</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("create", "employmenthistory", new { empId = Model.Id })
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btn-emp-close">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn-emp-create">Create Employment History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("delete", "employmenthistory", FormMethod.Post, new { id = "emp-form-delete" })) {  @Html.AntiForgeryToken() }
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/noty-animate.css")    
+    @Scripts.Render(
+        "~/bundles/jqueryval",
+        "~/bundles/noty")
 
     <script type="text/template" id="edu-template">
-        <li class="list-group-item-dcg" id="edu-{{Id}}">
-            <a href="#" id="delete-edu-{{Id}}" style="color: black"><span class="pull-right glyphicon glyphicon-trash"></span></a>
+        <li class="list-group-item-dcg">
+            <a href="#" class="edu-delete" data-id="{{Id}}" data-name="{{Name}}" style="color: black"><span class="pull-right glyphicon glyphicon-trash"></span></a>
             <h4 class="list-group-item-heading">{{Name}} <small>({{Type}})</small></h4>
             <p class="list-group-item-text">{{Degree}}</p>
             <p class="list-group-item-text">{{Address}}</p>
             <p class="list-group-item-text">{{ContactNum}}</p>
             <p class="list-group-item-text">{{YearAttended}}</p>
+        </li>
+    </script>
+
+    <script type="text/template" id="emp-template">
+        <li class="list-group-item-dcg">
+            <a href="#" class="emp-delete" data-id="{{Id}}" data-name="{{Employer}}" style="color: black"><span class="pull-right glyphicon glyphicon-trash"></span></a>
+            <h4 class="list-group-item-heading">{{Employer}} <small>({{Position}})</small></h4>
+            <p class="list-group-item-text">{{Address}}</p>
+            <p class="list-group-item-text">{{YearsOfServiceDisplay}}</p>
         </li>
     </script>
 
@@ -529,10 +578,14 @@
                 $('#emp-tab a[href="' + location.hash + '"]').tab('show');
             }
 
-            // populate education background for employee
+            
             var id = $("#emp-id").val();
+
+            // education background
+            // populate
             populateEducationalBackground(id);
 
+            // modal controls
             var eduForm = $("#edu-form");
             $("#btn-edu-create").click(function () {
                 if (eduForm.valid()) {
@@ -544,7 +597,56 @@
             $("#btn-edu-close").click(function () {
                 eduFormJs.reset();
             });
+            // end educational background
+
+            // employment history
+            // populate
+            populateEmploymentHistory(id);
+
+            var empForm = $("#emp-form");
+            $("#btn-emp-create").click(function () {
+                if (empForm.valid()) {
+                    empForm.submit();
+                }
+            });
+
+            var empFormJs = document.getElementById("emp-form");
+            $("#btn-emp-close").click(function () {
+                empFormJs.reset();
+            });
+            // end employment history
         });
+
+        // educational background delete 
+        $("#edu-list").on("click", ".edu-delete", function () {
+            var item = $(this);
+            var itemId = item.data("id");
+            var name = item.data("name");
+
+            showConfirm("You are about to delete '" + name + "' from the list, Proceed?", function () {
+                var eduFormDel = $("#edu-form-delete");
+                var action = eduFormDel.attr("action");
+                action = action + "/" + itemId;
+                eduFormDel.attr("action", action);
+                eduFormDel.submit();
+            });
+        });
+
+        // employment history delete
+        $("#emp-list").on("click", ".emp-delete", function () {
+            var item = $(this);
+            var itemId = item.data("id");
+            var name = item.data("name");
+
+            showConfirm("You are about to delete '" + name + "' from the list, Proceed?", function () {
+                var eduFormDel = $("#emp-form-delete");
+                var action = eduFormDel.attr("action");
+                action = action + "/" + itemId;
+                eduFormDel.attr("action", action);
+                eduFormDel.submit();
+            });
+        });
+
 
         function populateEducationalBackground(id) {
             var container = $("#edu-container");
@@ -563,13 +665,48 @@
                     $.each(data, function (i, v) {
                         var item = template
                             .replace("{{Id}}", v.Id)
-                            .replace("{{Id}}", v.Id)
+                            .replace("{{Name}}", v.Name)
                             .replace("{{Name}}", v.Name)
                             .replace("{{Type}}", v.TypeDisplay)
                             .replace("{{Degree}}", v.Degree == null ? "" : v.Degree)
                             .replace("{{Address}}", v.Address == null ? "" : v.Address)
                             .replace("{{ContactNum}}", v.ContactNumber == null ? "" : "Contact no. " + v.ContactNumber)
                             .replace("{{YearAttended}}", v.YearAttended);
+
+                        list.append(item);
+                    });
+                } else {
+                    list.append("<center>No data yet.</center>");
+                }
+
+                container.removeClass("overlay");
+                throbber.hide();
+                content.show();
+            });
+        }
+
+        function populateEmploymentHistory(id) {
+            var container = $("#emp-container");
+            var content = $(".emp-content");
+            var throbber = $("#emp-throbber");
+            container.addClass("overlay");
+            content.hide();
+            throbber.show();
+
+            $.get('@Url.Action("getbyemployee", "employmenthistory")' + '/' + id, function (data) {
+                var list = $("#emp-list");
+
+                if (data && data.length > 0) {
+                    var template = $("#emp-template").html();
+
+                    $.each(data, function (i, v) {
+                        var item = template
+                            .replace("{{Id}}", v.Id)
+                            .replace("{{Employer}}", v.Employer)
+                            .replace("{{Employer}}", v.Employer)
+                            .replace("{{YearsOfServiceDisplay}}", v.YearsOfServiceDisplay)
+                            .replace("{{Position}}", v.Position)
+                            .replace("{{Address}}", v.Address == null ? "" : v.Address)
 
                         list.append(item);
                     });

@@ -13,6 +13,8 @@ namespace HRMS.Web.Controllers
 {
     public class EmployeeController : Controller
     {
+        private const string notificationSuccess = "Employee-success";
+        private const string notificationError = "Employee-error";
         //
         // GET: /Employee/
         public ActionResult Index()
@@ -42,10 +44,12 @@ namespace HRMS.Web.Controllers
                 var repo = Ioc.Get<IEmployeeRepository>();
                 emp = repo.Create(emp);
 
-                TempData["Success"] = "New employee successfully created.";
+                TempData[notificationSuccess] = "New employee successfully created.";
 
                 return RedirectToAction("profile", new { id = emp.Id });
             }
+
+            TempData[notificationError] = "Be sure to input the required fields and in proper format.";
 
             ViewBag.Departments = Ioc.Get<IDepartmentRepository>().GetIdValuePair().ToSelectList(model.DepartmentId);
             ViewBag.Positions = Ioc.Get<IPositionRepository>().GetIdValuePair().ToSelectList(model.PositionId);
@@ -82,10 +86,12 @@ namespace HRMS.Web.Controllers
                 var repo = Ioc.Get<IEmployeeRepository>();
                 repo.Update(emp);
 
-                TempData["Success"] = "Employee info successfully updated.";
+                TempData[notificationSuccess] = "Employee info successfully updated.";
 
                 return RedirectToAction("profile", new { id = emp.Id });
             }
+
+            TempData[notificationError] = "Be sure to input the required fields and in proper format.";
 
             ViewBag.Departments = Ioc.Get<IDepartmentRepository>().GetIdValuePair().ToSelectList(model.DepartmentId);
             ViewBag.Positions = Ioc.Get<IPositionRepository>().GetIdValuePair().ToSelectList(model.PositionId);

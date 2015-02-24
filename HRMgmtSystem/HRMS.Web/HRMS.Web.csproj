@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EducationalBackgroundController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmploymentHistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,11 +140,13 @@
     <Compile Include="Models\EducationalBackgroundDtl.cs" />
     <Compile Include="Models\EmployeeDtl.cs" />
     <Compile Include="Models\EmployeeListItem.cs" />
+    <Compile Include="Models\EmploymentHistoryDtl.cs" />
     <Compile Include="Models\PositionDtl.cs" />
     <Compile Include="Models\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\noty-animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
@@ -222,6 +225,8 @@
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Profile.cshtml" />
     <Content Include="Views\EducationalBackground\CreateUpdateEducBackground.cshtml" />
+    <Content Include="Views\Shared\ShowNotification.cshtml" />
+    <Content Include="Views\EmploymentHistory\CreateUpdateEmpHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

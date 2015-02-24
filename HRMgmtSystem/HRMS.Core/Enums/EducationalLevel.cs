@@ -12,6 +12,6 @@ namespace HRMS.Core.Enums
         Secondary,
         Tertiary,
         Master,
-        Doctarate
+        Doctorate
     }
 }

@@ -7,7 +7,11 @@
         text: message,
         type: type,
         theme: "relax",
-        timeout: timeout
+        timeout: timeout,
+        animation: {
+            open: 'animated flipInX',
+            close: 'animated lightSpeedOut'
+        }
     });
 }
 
@@ -16,6 +20,10 @@ function showConfirm(message, onOK, onCancel) {
         layout: "center",
         text: message,
         theme: "relax",
+        animation: {
+            open: 'animated bounceIn',
+            close: 'animated bounceOut'
+        },
         buttons: [
 		{
 		    addClass: 'btn btn-primary', text: 'OK', onClick: function ($noty) {

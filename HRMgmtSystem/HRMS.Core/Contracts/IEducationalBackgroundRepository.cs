@@ -9,5 +9,6 @@ namespace HRMS.Core.Contracts
 {
     public interface IEducationalBackgroundRepository : ISingleIdRepository<EducationalBackground, int>
     {
+        IEnumerable<EducationalBackground> GetByEmployeeId(int id);
     }
 }
